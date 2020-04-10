@@ -13,9 +13,9 @@ import org.junit.*;
 /**
  * Unit test for simple App.
  */
-public class GoogleTeamTest 
+public class GoogleHappyTest 
 {
-    GoogleTeam teams;
+    GoogleHappy teams;
 	
 	@Rule 
 	public TestRule watcher =
@@ -27,7 +27,7 @@ public class GoogleTeamTest
 		
 	@Before
 	public void initialize(){
-		teams = new GoogleTeam();
+		teams = new GoogleHappy();
 	}
 	
     @Test
