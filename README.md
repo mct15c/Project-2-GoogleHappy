@@ -9,10 +9,6 @@ Timeline
 </br>-write some test cases
 </br>-find way to read and preferences from file
 
-#User Story:
----
-</br>-Team selection software to be used either by professors, students, or any person who might want to make better and happy teams.
-
 #Master Story:
 ---
 </br>-write user story and inception deck – 1 day
