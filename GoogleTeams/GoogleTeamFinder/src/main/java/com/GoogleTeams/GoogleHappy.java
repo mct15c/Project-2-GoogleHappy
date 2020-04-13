@@ -1,4 +1,4 @@
-import java.io.BufferedReader;
+iimport java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -9,6 +9,10 @@ public class GoogleHappy {
 	
 	ArrayList<ArrayList<Integer>> adj; // <-class variable/ field
 	ArrayList<ArrayList<String>> namePref;
+	private int rowSize;
+	private int columnSize;
+	private int thisOne;
+	private int thisZero;
   
 
 	public static void main(String[] args) 
@@ -32,10 +36,15 @@ public class GoogleHappy {
 			
 			System.out.println("After:");
 			graph.printGraph(graph.adj); //After graph has 1's
+			
 	}
 	
 	public void listMaker()
 	{
+		int rowSize = 0;
+		int columnSize = 0;
+		
+		boolean allZeroes = true;
 		for (int i = 0; i < namePref.size(); i++) {
 				
 				ArrayList<Integer> zeroList = new ArrayList<Integer>();
@@ -43,15 +52,25 @@ public class GoogleHappy {
 				
 				for(int c=0; c < namePref.size(); c++){
 					zeroList.add(0);
+					columnSize++;
 				}
 				
 				adj.add(zeroList);
 							
 				System.out.println(" ");
 				
-				
+				rowSize++;
+				System.out.println("rowSize:" +rowSize);
 		}
+	
 	}
+	
+	//For tests
+	/*
+	public List getList(){
+		return zeroList;
+	}
+	*/
   
   	public Integer nameCatcher(String name, ArrayList<ArrayList<String>> nameIndex)
 	{
@@ -108,6 +127,7 @@ public class GoogleHappy {
             for(int mRow = 0; mRow < size; mRow++) {  ///// while we are not done with the file, keep looping through each row in the file
 				
 				ArrayList<String> csv_row = namePref.get(mRow);
+				int zeroChecker = 0;
 
 				for(int mColumn = 1; mColumn < csv_row.size(); mColumn++){
 				  // Suzie,Ivanka,Donald
@@ -118,11 +138,12 @@ public class GoogleHappy {
 				  // where is Suzie's row?
 				  // we know the location (Suzie, Ivanka) in the matrix should be 1
 				  
-					System.out.print(nameCatcher(csv_row.get(mColumn), namePref));
+					//System.out.print(nameCatcher(csv_row.get(mColumn), namePref));
 					
 					adj.get(mRow).set(nameCatcher(csv_row.get(mColumn), namePref), 1);
+					int oneChecker = 1;
 				  
-					System.out.print(adj.get(mRow).get(mColumn));
+					//System.out.print(adj.get(mRow).get(mColumn));
 
 				}
 				  
@@ -159,47 +180,26 @@ public class GoogleHappy {
 				System.out.println(); 
 			} 
 		} 
-} 
-
-/*
-
-Calvin -> 0
-Bubba -> 1
-Blinkendorfer -> 2
-...
-
-adj.get(Bubba).get(Calvin)
-
-			Calvin		Bubba		Blink		Suzie		Snoopie		Donald		Billy		Ivanka		Mitch
-Calvin         0          0           1
-Bubba          1          0           0
-Blink          0          1           0
-Suzie		   0          0           0          0           0          0           0          0           0
-Snoopie		   0          0           0          0           0          0           0          0           0
-Donald         0          0           0          0           0          0           0          0           0
-Billy          0          0           0          0           0          0           0          0           0
-Ivanka		   0		  0           0          1           0          1           1          0           0
-
-
-*/
-/*
-Calvin,Bubba,Blinkendorfer,Suzie
-Bubba,Snoopie,Donald
-Blinkendorfer,Bubba,Billy,Ivanka
-Suzie,Ivanka,Donald
-Donald,Bubba,Ivanka,Mitch
-Mitch,Snoopie,Bubba,Suzie,Ivanka,Donald
-Snoopie,Bubba
-Billy,Donald,Blinkendorfer
-Ivanka,Donald,Billy,Suzie
-
-9  Bob Jim  
-Bob 0   1   1   1 0 0 0 0 0
-Jim 0   0   0   0 1 0 1 0 0
-0 1 0 0 0 0 0 1 1
-0 0 0 0 1 0 0 0 1
-0 1 0 0 0 1 0 0 1
-0 1 0 1 1 0 1 0 1
-0 1 0 0 0 0 0 0 0
-0 0 1 0 1 0 0 0 0
-0 0 0 1 1 0 0 1 0 */
+		
+		public int getRowSize(){
+			//System.out.println("Other rowSize:" +rowSize);
+			return rowSize;
+		}
+		
+		public int getColumnSize(){
+			return columnSize;
+		}
+		
+		public int zeroChecker(){
+			return thisZero;
+		}
+		
+		public int oneChecker(){
+			return thisOne;
+		}
+		
+		public void resetSizes(){
+			rowSize = 0;
+			columnSize = 0;
+		}
+}
