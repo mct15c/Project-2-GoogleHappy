@@ -1,4 +1,4 @@
-iimport java.io.BufferedReader;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -9,8 +9,6 @@ public class GoogleHappy {
 	
 	ArrayList<ArrayList<Integer>> adj; // <-class variable/ field
 	ArrayList<ArrayList<String>> namePref;
-	private int rowSize;
-	private int columnSize;
 	private int thisOne;
 	private int thisZero;
   
@@ -37,12 +35,16 @@ public class GoogleHappy {
 			System.out.println("After:");
 			graph.printGraph(graph.adj); //After graph has 1's
 			
+			graph.pageRank_maker();
+			
+			//PageRank p = new PageRank();
+			//p.path = arrayListToArray(graph.adj);
+			//p.calc(graph.adj.size());
+			
 	}
 	
 	public void listMaker()
 	{
-		int rowSize = 0;
-		int columnSize = 0;
 		
 		boolean allZeroes = true;
 		for (int i = 0; i < namePref.size(); i++) {
@@ -50,17 +52,13 @@ public class GoogleHappy {
 				ArrayList<Integer> zeroList = new ArrayList<Integer>();
 				
 				
-				for(int c=0; c < namePref.size(); c++){
+				for(int c=0; c < namePref.size(); c++){ 
 					zeroList.add(0);
-					columnSize++;
 				}
 				
 				adj.add(zeroList);
 							
 				System.out.println(" ");
-				
-				rowSize++;
-				System.out.println("rowSize:" +rowSize);
 		}
 	
 	}
@@ -130,18 +128,11 @@ public class GoogleHappy {
 				int zeroChecker = 0;
 
 				for(int mColumn = 1; mColumn < csv_row.size(); mColumn++){
-				  // Suzie,Ivanka,Donald
-				  
-				  // current person -> Ivanka
-				  // we know the current Adj Matrix is matrix
-				  // we know Suzie wants Ivanka
-				  // where is Suzie's row?
-				  // we know the location (Suzie, Ivanka) in the matrix should be 1
 				  
 					//System.out.print(nameCatcher(csv_row.get(mColumn), namePref));
 					
 					adj.get(mRow).set(nameCatcher(csv_row.get(mColumn), namePref), 1);
-					int oneChecker = 1;
+					//int oneChecker = 1;
 				  
 					//System.out.print(adj.get(mRow).get(mColumn));
 
@@ -181,13 +172,38 @@ public class GoogleHappy {
 			} 
 		} 
 		
+		public int[][] arrayListToArray(ArrayList<ArrayList<Integer>> adj){
+			int[][] newArray = new int[adj.size()][adj.size()];
+			
+			for(int c = 0; c < adj.size(); c++){
+				
+				
+				for(int d=0; d < adj.size(); d++){
+					newArray[c][d] = adj.get(c).get(d);
+				
+				}
+				
+			}
+			
+			return newArray;
+		}
+		
+		
+		public void pageRank_maker(){
+			PageRank pagerank = new PageRank(); 
+			pagerank.path = arrayListToArray(adj);
+			double numNodes = namePref.size();
+			pagerank.calc(numNodes-1);
+		}
+		
+		
 		public int getRowSize(){
 			//System.out.println("Other rowSize:" +rowSize);
-			return rowSize;
+			return adj.get(0).size();
 		}
 		
 		public int getColumnSize(){
-			return columnSize;
+			return adj.size();
 		}
 		
 		public int zeroChecker(){
@@ -197,9 +213,4 @@ public class GoogleHappy {
 		public int oneChecker(){
 			return thisOne;
 		}
-		
-		public void resetSizes(){
-			rowSize = 0;
-			columnSize = 0;
-		}
-}
+} 
