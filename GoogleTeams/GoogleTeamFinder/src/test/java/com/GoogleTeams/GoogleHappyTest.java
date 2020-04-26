@@ -500,6 +500,7 @@ public class GoogleHappyTest
 		assertEquals(arrayLengthCheck, expected);
 	}
 	
+	// TEST NUMBER 32
 	@Test
 	public void test1NonLinear()
 	{
@@ -516,6 +517,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 33
 	@Test
 	public void test2NonLinear()
 	{
@@ -532,6 +534,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 34
 	@Test
 	public void test3NonLinear()
 	{
@@ -548,6 +551,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 35
 	@Test
 	public void test4NonLinear()
 	{
@@ -564,6 +568,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 36
 	@Test
 	public void test5NonLinear()
 	{
@@ -580,6 +585,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 37
 	@Test
 	public void test1ArraySorter()
 	{
@@ -598,6 +604,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 38
 	@Test
 	public void test2ArraySorter()
 	{
@@ -616,6 +623,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 39
 	@Test
 	public void test3ArraySorter()
 	{
@@ -634,6 +642,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 40
 	@Test
 	public void test4ArraySorter()
 	{
@@ -652,6 +661,7 @@ public class GoogleHappyTest
 		
 	}
 	
+	// TEST NUMBER 41
 	@Test
 	public void test5ArraySorter()
 	{
