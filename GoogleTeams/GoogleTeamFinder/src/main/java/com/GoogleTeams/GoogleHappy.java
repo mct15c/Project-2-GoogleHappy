@@ -5,12 +5,16 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.*;
 
+
+
+
 public class GoogleHappy {
 	
 	ArrayList<ArrayList<Integer>> adj; // <-class variable/ field
 	ArrayList<ArrayList<String>> namePref;
 	private int thisOne;
 	private int thisZero;
+	double [] result; 
   
 
 	public static void main(String[] args) 
@@ -36,6 +40,10 @@ public class GoogleHappy {
 			graph.printGraph(graph.adj); //After graph has 1's
 			
 			graph.pageRank_maker();
+			
+			String [] sortedNameArray = graph.arraySorter();
+			
+			//teamMaker(sortedNameArray);
 			
 			//PageRank p = new PageRank();
 			//p.path = arrayListToArray(graph.adj);
@@ -190,11 +198,103 @@ public class GoogleHappy {
 		
 		
 		public void pageRank_maker(){
-			PageRank pagerank = new PageRank(); 
+			PageRank pagerank = new PageRank(); //Linear pagerank
+			//PageRank_NonLinear pagerank = new PageRank_NonLinear();	 //Non Linear pagerank				
 			pagerank.path = arrayListToArray(adj);
 			double numNodes = namePref.size();
-			pagerank.calc(numNodes-1);
+			result = pagerank.calc(numNodes);
+			
+			
+			//for(int c=0; c < result.length-1; c++)
+				//System.out.println(result[c]);
 		}
+		
+		public String[] arraySorter(){
+			double [] result_copy = new double [result.length];
+			String [] namePrefCopy = new String[namePref.size()];
+			double score; 
+			
+			for(int c=0; c < result.length-1; c++)
+				result_copy[c] = result[c];
+			
+			Arrays.sort(result);
+			
+			//System.out.println("Copy:");
+			
+			//for(int c=0; c < result_copy.length-1; c++)
+			//	System.out.println(result_copy[c]);
+			
+			//System.out.println("Sorted:");
+			
+			for(int c=1; c < result.length; c++){
+				//System.out.println(result[c]);
+				
+				for(int d=0; d < namePref.size(); d++){
+					String name = namePref.get(c-1).get(0);
+					score = result_copy[c-1];
+					//System.out.println(score);
+					
+					//System.out.println(name);
+					//if(Arrays.asList(namePref).indexOf(c)){
+					//	namePrefCopy[d] = (namePref.get(d).get(0));
+					//}
+					
+					int scoreIndex = indexer(result, score);
+					//System.out.println(scoreIndex + " " + c);
+					
+					
+					//System.out.println(namePrefCopy.length+ " //" + result.length);
+					
+					
+					namePrefCopy[c-1] = namePref.get(scoreIndex-1).get(0);
+					
+					
+					
+				}
+				
+			}
+			//->for verbosity
+			/*
+			for(int c=0; c < namePrefCopy.length; c++)
+				System.out.println(namePrefCopy[c]);
+			
+			for(int c=0; c < namePrefCopy.length; c++){
+				System.out.println(result[c]);
+				System.out.println("copy:"+result_copy[c]);
+				System.out.println("Name in original order:" + namePref.get(c).get(0));
+			}
+			*/
+			
+			//result_copy = result;			
+			//result = Arrays.sort(result);
+			
+			return namePrefCopy;
+		
+		}
+		
+		/*
+		void teamMaker(){
+			ArrayList<String> team1 = new ArrayList<String>();
+			
+			
+			for(int c =0; c < 
+ 			
+			
+			
+			
+		}
+		*/
+		
+		
+		
+		int indexer(double[] checker, double setter){
+		
+			for(int c=0; c < checker.length; c++){
+				if(checker[c] == setter)
+					return c;
+			}	
+			return -1;
+		}			
 		
 		
 		public int getRowSize(){
