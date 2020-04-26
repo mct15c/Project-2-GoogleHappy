@@ -499,3 +499,173 @@ public class GoogleHappyTest
 		int[][] expected = {{0,0},{1,1}};
 		assertEquals(arrayLengthCheck, expected);
 	}
+	
+	@Test
+	public void test1NonLinear()
+	{
+		
+		
+		int[] nonLinearArray = new int [9];
+		for(int c=0; c < 9; c++) //length of this file's result array 
+			nonLinearArray[c] = 0;
+			
+		
+		int expected = nonLinearArray[0];
+		int nonLinearValue = 0;
+		assertEquals(nonLinearValue, expected);
+		
+	}
+	
+	@Test
+	public void test2NonLinear()
+	{
+		
+		
+		int[] nonLinearArray = new int [7];
+		for(int c=0; c < 7; c++) //length of this file's result array 
+			nonLinearArray[c] = 0;
+			
+		
+		int expected = nonLinearArray[0];
+		int nonLinearValue = 0;
+		assertEquals(nonLinearValue, expected);
+		
+	}
+	
+	@Test
+	public void test3NonLinear()
+	{
+		
+		
+		int[] nonLinearArray = new int [9];
+		for(int c=0; c < 9; c++) //length of this file's result array 
+			nonLinearArray[c] = 0;
+			
+		
+		int expected = nonLinearArray[0];
+		int nonLinearValue = 0;
+		assertEquals(nonLinearValue, expected);
+		
+	}
+	
+	@Test
+	public void test4NonLinear()
+	{
+		
+		
+		int[] nonLinearArray = new int [10];
+		for(int c=0; c < 10; c++) //length of this file's result array 
+			nonLinearArray[c] = 0;
+			
+		
+		int expected = nonLinearArray[0];
+		int nonLinearValue = 0;
+		assertEquals(nonLinearValue, expected);
+		
+	}
+	
+	@Test
+	public void test5NonLinear()
+	{
+		
+		
+		int[] nonLinearArray = new int [9];
+		for(int c=0; c < 9; c++) //length of this file's result array 
+			nonLinearArray[c] = 0;
+			
+		
+		int expected = nonLinearArray[0];
+		int nonLinearValue = 0;
+		assertEquals(nonLinearValue, expected);
+		
+	}
+	
+	@Test
+	public void test1ArraySorter()
+	{
+		int[] nonLinearArray = new int [9];
+		for(int c=0; c < 9; c++) //length of this file's result array 
+			nonLinearArray[c] = c;
+			
+		
+		int expected = nonLinearArray[0];
+		int sortedValue = 0;
+		assertEquals(sortedValue, expected);
+		
+		int expected2 = nonLinearArray[1];
+		int sortedValue2 = 1;
+		assertEquals(sortedValue2, expected2);
+		
+	}
+	
+	@Test
+	public void test2ArraySorter()
+	{
+		int[] nonLinearArray = new int [7];
+		for(int c=0; c < 7; c++) //length of this file's result array 
+			nonLinearArray[c] = c;
+			
+		
+		int expected = nonLinearArray[0];
+		int sortedValue = 0;
+		assertEquals(sortedValue, expected);
+		
+		int expected2 = nonLinearArray[1];
+		int sortedValue2 = 1;
+		assertEquals(sortedValue2, expected2);
+		
+	}
+	
+	@Test
+	public void test3ArraySorter()
+	{
+		int[] nonLinearArray = new int [9];
+		for(int c=0; c < 9; c++) //length of this file's result array 
+			nonLinearArray[c] = c;
+			
+		
+		int expected = nonLinearArray[0];
+		int sortedValue = 0;
+		assertEquals(sortedValue, expected);
+		
+		int expected2 = nonLinearArray[1];
+		int sortedValue2 = 1;
+		assertEquals(sortedValue2, expected2);
+		
+	}
+	
+	@Test
+	public void test4ArraySorter()
+	{
+		int[] nonLinearArray = new int [10];
+		for(int c=0; c < 10; c++) //length of this file's result array 
+			nonLinearArray[c] = c;
+			
+		
+		int expected = nonLinearArray[0];
+		int sortedValue = 0;
+		assertEquals(sortedValue, expected);
+		
+		int expected2 = nonLinearArray[1];
+		int sortedValue2 = 1;
+		assertEquals(sortedValue2, expected2);
+		
+	}
+	
+	@Test
+	public void test5ArraySorter()
+	{
+		int[] nonLinearArray = new int [9];
+		for(int c=0; c < 9; c++) //length of this file's result array 
+			nonLinearArray[c] = c;
+			
+		
+		int expected = nonLinearArray[0];
+		int sortedValue = 0;
+		assertEquals(sortedValue, expected);
+		
+		int expected2 = nonLinearArray[1];
+		int sortedValue2 = 1;
+		assertEquals(sortedValue2, expected2);
+		
+	}
