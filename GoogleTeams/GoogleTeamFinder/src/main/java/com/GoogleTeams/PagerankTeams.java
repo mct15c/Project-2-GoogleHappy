@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.*;
 import java.util.Collection;
+import java.io.InputStreamReader;
 import java.util.Hashtable;
 
 
@@ -29,23 +30,21 @@ public class PagerankTeams {
 	private static boolean v_three = false;
 	private static boolean v_four = false;
   
-
+	
 	public static void main(String[] args) 
 	{ 
-	
-		System.out.println("args:"+args);
 	//Argument getter//
 	
 		if (args.length > 0) { 
 
-            System.out.println("The command line"+ 
-                               " arguments are:"); 
+            //System.out.println("The command line"+ 
+            //                   " arguments are:"); 
 
             // iterating the args array and printing 
             // the command line arguments 
-            for (int val = 0; val < args.length; val+=2) {
+            for (int val = 0; val < args.length; val++) {
 
-                if(args[val] == "-v"){
+                if(args[val].equals("-v")){
                     if(Integer.valueOf(args[val + 1])> 0){
                         v_one = true;
                     }
@@ -67,43 +66,48 @@ public class PagerankTeams {
                         v_three = true;
                         v_four = true;
                     }
+					
+					if(v_three)
+						System.out.println("Verbosities: v1: "+ v_one+ " v2: " + v_two+ " v3: " + v_three+ " v4: " + v_four);
                 }
+			
 
-                if(args[val] == "-t"){
+                if(args[val].equals("-t")){
                     teamSize = Integer.valueOf(args[val+1]);
+					if(teamSize < 2)
+						teamSize = 2;
                 }
-				
-				if(args[val] == "preferences.txt"){
-					fileName = String.valueOf(args[val+1]);
-				}
-				
-                System.out.println(val); 
+	 
             }
         } else {
             System.out.println("No command line "+ 
                                "arguments found."); 
         }
 	
-	
+		
 	//Called Functions//
 	
 			PagerankTeams graph = new PagerankTeams();
 			graph.adj = new ArrayList<ArrayList<Integer>> (); 
-			// Creating a graph with 5 vertices 
-			// Current length = 9, find out how to read it in. 9 is a placeholder
 			
-			boolean readable = graph.readFile("C:/Users/Matt/GoogleTeams/GoogleTeamFinder/Pref_Inputs6.csv");
+			boolean readable = graph.readFile(fileName);
+			//boolean readable = graph.readFile("C:/Users/Matt/GoogleTeams/GoogleTeamFinder/Pref_Inputs6.csv");
 			if(!readable)
 				return;
 			
 			graph.listMaker();
 			
-			System.out.println("Before:");
-			graph.printGraph(graph.adj); //Before graph has 1's
-			graph.addAdjacencies(graph.namePref);
+			if(v_three){
+				System.out.println("Before:");
+				graph.printGraph(graph.adj); //Before graph has 1's
+			}
 			
-			System.out.println("After:");
-			graph.printGraph(graph.adj); //After graph has 1's
+				graph.addAdjacencies(graph.namePref);
+				
+			if(v_three){
+				System.out.println("After:");
+				graph.printGraph(graph.adj); //After graph has 1's
+			}
 			
 			graph.pageRank_maker();
 			
@@ -114,6 +118,7 @@ public class PagerankTeams {
 			//PageRank p = new PageRank();
 			//p.path = arrayListToArray(graph.adj);
 			//p.calc(graph.adj.size());
+			
 			
 	}
 	
@@ -146,13 +151,17 @@ public class PagerankTeams {
   	public Integer nameCatcher(String name, ArrayList<ArrayList<String>> nameIndex)
 	{
       	
-		//System.out.print("Name:"+ name + "\n");
+		System.out.println();
+		System.out.print("Name:"+ name + "\n");
 		
 		for(int rowIndex = 0; rowIndex < nameIndex.size(); rowIndex++){
 			//System.out.print("D:"+ d + "\n \n");
 			
 			ArrayList<String> row = nameIndex.get(rowIndex);
-			///Verbosity System.out.println(row.get(0)+"/// "+ name);
+			
+			if(PagerankTeams.v_two)
+				System.out.println(row.get(0)+"/// "+ name);
+			
 			if(row.get(0).equals(name)) {
 				//System.out.print(row.get(0) + name);
 				return rowIndex; //if name found, return name;
@@ -164,13 +173,25 @@ public class PagerankTeams {
     public boolean readFile(String file) 
 	{
 
-        String csvFile = file;
         String line = "";
         String csvSplitBy = ",";
 		
 		namePref = new ArrayList();
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+		BufferedReader br;
+			
+		
+		try{
+			//System.out.println(file);
+			
+			if(file != (null)){
+				FileReader inReader = new FileReader(file);
+				br = new BufferedReader(inReader);	
+			}
+			else{
+				InputStreamReader inFile = new InputStreamReader(System.in);
+				br = new BufferedReader(inFile);
+			}
 
           	while ((line = br.readLine()) != null){
             	ArrayList <String> adj_row = new ArrayList();
@@ -188,6 +209,11 @@ public class PagerankTeams {
 				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!CSV Empty!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				return false;
 			}
+			
+			if(teamSize > namePref.size()/2)
+				teamSize = namePref.size()/2;
+			
+			
 			return true;
 
     } 
@@ -208,16 +234,19 @@ public class PagerankTeams {
 
 				for(int mColumn = 1; mColumn < csv_row.size(); mColumn++){
 				  
-					//System.out.print(nameCatcher(csv_row.get(mColumn), namePref));
+					if(v_three)
+						System.out.print(nameCatcher(csv_row.get(mColumn), namePref));
 					
 					ArrayList<Integer> rowTest = adj.get(mRow);
-					//System.out.println("rowTest worked.");
+					if(v_three)
+						System.out.println("rowTest worked.");
 					int caughtName = nameCatcher(csv_row.get(mColumn), namePref);
 					//rowTest.set(caughtName, 1); ---for tester
 					adj.get(mRow).set(caughtName, 1);
 					//int oneChecker = 1;
 				  
-					//System.out.print(adj.get(mRow).get(mColumn));
+					if(v_three)
+						System.out.print(adj.get(mRow).get(mColumn));
 
 				}
 				  
@@ -242,10 +271,12 @@ public class PagerankTeams {
 		// representation of graph 
 		void printGraph(ArrayList<ArrayList<Integer> > adj) 
 		{ 
-			//System.out.print(adj.size());
+			if(v_one)
+				System.out.println("Matrix size: "+adj.size()+" by" +adj.size());
 			
 			for (int i = 0; i < adj.size(); i++) { 
-				//System.out.println("\nAdjacency list of vertex" + i);
+				if(v_two)
+					System.out.println("\nAdjacency list of vertex " + i);
 				
 				for (int j = 0; j < adj.get(i).size(); j++) { 
 					System.out.print(" -> "+adj.get(i).get(j)); 
@@ -281,9 +312,10 @@ public class PagerankTeams {
 			//checkResult = result[0];
 			//return result;
 			
-			
-			//for(int c=0; c < result.length; c++)
-				//System.out.println(result[c]);
+			if(v_three){
+				for(int c=0; c < result.length; c++)
+					System.out.println("Pagerank Values: "+result[c]);
+			}
 		}
 		
 		public String[][] arraySorter(){
@@ -300,11 +332,12 @@ public class PagerankTeams {
 			//System.out.println(result.length);
 
 			
+			if(v_three){
+				System.out.println("Copy of result:");
 			
-			//System.out.println("Copy:");
-			
-			//for(int c=0; c < result_copy.length; c++)
-			//	System.out.println(result_copy[c]);
+				for(int c=0; c < result_copy.length; c++)
+					System.out.println(result_copy[c]);
+			}
 			
 			//System.out.println("Sorted:");
 			
@@ -324,10 +357,12 @@ public class PagerankTeams {
 					//}
 					
 					int scoreIndex = indexer(result, score);
-					//System.out.println(scoreIndex + " " + c);
 					
-					
-					//System.out.println(namePrefCopy.length+ " //" + result.length);
+					if(v_four){
+						System.out.println("Score Index:");
+						System.out.println(scoreIndex + " " + c);
+						System.out.println(namePrefCopy.length+ "//" + result.length);
+					}
 					
 					
 					namePrefCopy[c][0] = namePref.get(scoreIndex).get(0);
@@ -339,19 +374,23 @@ public class PagerankTeams {
 				
 			}
 			//->for verbosity
-			/*
-			for(int c=0; c < namePrefCopy.length; c++){
-				System.out.println("---");
-				for(int d=0; d < namePrefCopy[c].length; d++)
-					System.out.println("name:" + namePrefCopy[c][d]);
+			
+			if(v_four){
+				System.out.println("Sorted arrays of scores:");
+				for(int c=0; c < namePrefCopy.length; c++){
+					System.out.println("---");
+					for(int d=0; d < namePrefCopy[c].length; d++)
+						System.out.println("name:" + namePrefCopy[c][d]);
+				}
+				
+				for(int c=0; c < namePrefCopy.length; c++){
+					System.out.println(result[c]);
+					System.out.println("copy:"+result_copy[c]);
+					System.out.println("Name in original order:" + namePref.get(c).get(0));
+					System.out.println();
+				}
 			}
-			/*
-			for(int c=0; c < namePrefCopy.length; c++){
-				System.out.println(result[c]);
-				System.out.println("copy:"+result_copy[c]);
-				System.out.println("Name in original order:" + namePref.get(c).get(0));
-			}
-			*/
+			
 			
 			//result_copy = result;			
 			//result = Arrays.sort(result);
@@ -390,7 +429,9 @@ public class PagerankTeams {
 						//System.out.println(prefChecker + currentName);
 						//newTeam.add(currentName);
 						alreadyPicked.add(currentName);
-						//Verbosity: System.out.println(currentTeam+"  "+currentTeamWeight+"  " +teamSize + "  "+teamHolder.length);
+						
+						System.out.println("currentTeam, currentTeamweight, teamSize, teamHolder.length");
+							System.out.println(currentTeam+"  "+currentTeamWeight+"  " +teamSize + "  "+teamHolder.length);
 						
 						//System.out.println(currentTeam + currentTeamWeight + teamHolder.length);
 						
@@ -644,4 +685,4 @@ public class PagerankTeams {
 		public int [] teamList(){
 			return teamArray;
 		}
-} 
+}
