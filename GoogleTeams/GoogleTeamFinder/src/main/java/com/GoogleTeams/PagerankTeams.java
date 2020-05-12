@@ -211,6 +211,18 @@ public class PagerankTeams {
 				return false;
 			}
 			
+			if(namePref.get(0).get(0).equals("")){
+				System.out.println();
+				System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!CSV Empty!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				return false;
+			}
+			
+			//if(namePref.get(0) == ""){
+			//	System.out.println();
+			//	System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!CSV Empty!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			//	return false;
+			//}
+			
 			if(teamSize > namePref.size()/2)
 				teamSize = namePref.size()/2;
 			
