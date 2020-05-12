@@ -150,9 +150,10 @@ public class PagerankTeams {
   
   	public Integer nameCatcher(String name, ArrayList<ArrayList<String>> nameIndex)
 	{
-      	
-		System.out.println();
-		System.out.print("Name:"+ name + "\n");
+      	if(v_two){
+			System.out.println();
+			System.out.print("Name:"+ name + "\n");
+		}
 		
 		for(int rowIndex = 0; rowIndex < nameIndex.size(); rowIndex++){
 			//System.out.print("D:"+ d + "\n \n");
@@ -430,8 +431,10 @@ public class PagerankTeams {
 						//newTeam.add(currentName);
 						alreadyPicked.add(currentName);
 						
+						if(v_three){
 						System.out.println("currentTeam, currentTeamweight, teamSize, teamHolder.length");
 							System.out.println(currentTeam+"  "+currentTeamWeight+"  " +teamSize + "  "+teamHolder.length);
+						}
 						
 						//System.out.println(currentTeam + currentTeamWeight + teamHolder.length);
 						
