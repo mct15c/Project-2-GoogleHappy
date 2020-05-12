@@ -915,4 +915,31 @@ public class PagerankTeamsTest
 		assertEquals(sortedValue2, expected2);
 		
 	}
+	
+	/*@Test
+	public void testEmptyArrayList()
+	{
+		ArrayList<ArrayList<Integer>> arrayLength = new ArrayList<ArrayList<Integer>>();
+		ArrayList<Integer> row0 = new ArrayList<Integer>();
+		ArrayList<Integer> row1 = new ArrayList<Integer>();
+		arrayLength.add(row0);
+		arrayLength.add(row1);
+		int[][] arrayLengthCheck = teams.arrayListToArray(arrayLength);
+		int[][] expected = {{},{}};
+		assertEquals(arrayLengthCheck, expected);
+	}
+	*/
+	
+	
 }
+
+	
+/*	@Test
+	public void test2PageRank()
+	{
+		boolean worked = teams.
+		assertEquals(true, worked);
+		System.out.println("\n");
+	}
+}
+*/
