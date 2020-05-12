@@ -39,7 +39,7 @@ public class PagerankTeamsTest
 		// Creating a graph with 5 vertices 
 		// Current length = 9, find out how to read it in. 9 is a placeholder
 		
-		teams.readFile("C:/Users/Matt/GoogleTeams/GoogleTeamFinder/Pref_Inputs.csv");
+		teams.readFile("Pref_Inputs.csv");
 		
 		teams.listMaker();
 	}
