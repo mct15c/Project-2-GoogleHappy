@@ -79,7 +79,7 @@ public class PagerankTeamsTest
     public void test4ReadFile()
     {
 		boolean worked = teams.readFile("Pref_Inputs4.csv");
-		assertEquals(true, worked);
+		assertEquals(false, worked);
 		System.out.println("\n");
 		
 		
@@ -284,10 +284,10 @@ public class PagerankTeamsTest
 		teams.adj = new ArrayList<ArrayList<Integer>>();
 		boolean worked = teams.readFile("Pref_Inputs4.csv");
 		//teams.listMaker();
-		assertEquals(true, worked);
+		assertEquals(false, worked);
 		int numColumns = teams.getColumnSize();
 		//System.out.println("Number of rows in matrix: " +numRows);
-		assertEquals(true, worked);
+		assertEquals(false, worked);
 		assertEquals(0,numColumns);
 		System.out.println("\n");
 	}
@@ -437,7 +437,7 @@ public class PagerankTeamsTest
 	public void test4ZeroCheck()
 	{
 		boolean worked = teams.readFile("Pref_Inputs4.csv");
-		assertEquals(true, worked);
+		assertEquals(false, worked);
 		ArrayList<Integer> expected = new ArrayList<Integer>();
 		expected.add(0);
 		expected.add(0);
@@ -457,7 +457,7 @@ public class PagerankTeamsTest
 	{
 		boolean worked = teams.readFile("Pref_Inputs4.csv");
 		teams.addAdjacencies(teams.namePref);
-		assertEquals(true, worked);
+		assertEquals(false, worked);
 		ArrayList<Integer> expected = new ArrayList<Integer>();
 		expected.add(0);
 		expected.add(0);
@@ -932,14 +932,3 @@ public class PagerankTeamsTest
 	
 	
 }
-
-	
-/*	@Test
-	public void test2PageRank()
-	{
-		boolean worked = teams.
-		assertEquals(true, worked);
-		System.out.println("\n");
-	}
-}
-*/
